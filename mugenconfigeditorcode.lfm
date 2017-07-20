@@ -1,0 +1,80 @@
+object Form1: TForm1
+  Left = 234
+  Height = 262
+  Top = 134
+  Width = 320
+  Caption = 'Form1'
+  ClientHeight = 243
+  ClientWidth = 320
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnResize = FormResize
+  LCLVersion = '1.4.0.4'
+  object Memo1: TMemo
+    Left = 8
+    Height = 240
+    Top = 0
+    Width = 240
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 0
+    WordWrap = False
+  end
+  object OpenDialog1: TOpenDialog
+    OnCanClose = OpenDialog1CanClose
+    left = 272
+    top = 80
+  end
+  object SaveDialog1: TSaveDialog
+    OnCanClose = SaveDialog1CanClose
+    left = 272
+    top = 144
+  end
+  object MainMenu1: TMainMenu
+    left = 272
+    top = 192
+    object MenuItem1: TMenuItem
+      Caption = 'File'
+      object MenuItem2: TMenuItem
+        Caption = 'New'
+        OnClick = MenuItem2Click
+      end
+      object MenuItem3: TMenuItem
+        Caption = 'Open'
+        OnClick = MenuItem3Click
+      end
+      object MenuItem4: TMenuItem
+        Caption = 'Save'
+        OnClick = MenuItem4Click
+      end
+      object MenuItem5: TMenuItem
+        Caption = 'Save as'
+        OnClick = MenuItem5Click
+      end
+    end
+    object MenuItem6: TMenuItem
+      Caption = 'Clipboard'
+      object MenuItem7: TMenuItem
+        Caption = 'Copy'
+        OnClick = MenuItem7Click
+      end
+      object MenuItem8: TMenuItem
+        Caption = 'Paste'
+        OnClick = MenuItem8Click
+      end
+      object MenuItem9: TMenuItem
+        Caption = 'Cut'
+        OnClick = MenuItem9Click
+      end
+    end
+    object MenuItem10: TMenuItem
+      Caption = 'Help'
+      object MenuItem11: TMenuItem
+        Caption = 'About program'
+        OnClick = MenuItem11Click
+      end
+    end
+  end
+end
