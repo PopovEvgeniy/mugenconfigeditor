@@ -1,6 +1,6 @@
                                 MUGEN CONFIG EDITOR
 
-                                  Version 1.7.1
+                                  Version 1.7.1.0.1
 
                          Created by Popov Evgeniy Alekseyevich
 
@@ -11,7 +11,7 @@ WINE environment for run under a UNIX operation systems
 
 Program description
 
-This program is a simple editor for edit mugen config files.
+This program is a simple editor for edit mugen configuration files.
 
 Supported file types
 
@@ -39,5 +39,6 @@ It can be compiled under Lazarus 1.4 or higher.
 Change log
 
 1.0 - 1.6.6 - Old builds.
-1.6.7 - Totally program rewriten.
+1.6.7 – Program was totally rewritten.
 1.6.8 - 1.7.1 - Small changes in source code.
+1.7.1.0.1 – Documentation was updated.
