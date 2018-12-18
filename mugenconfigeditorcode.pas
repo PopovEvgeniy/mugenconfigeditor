@@ -50,10 +50,10 @@ type
 procedure window_setup();
 procedure window_resize();
 procedure interface_setup();
+procedure dialog_setup();
 function get_file_extension(filter:Byte):string;
 function check_format(name:string):boolean;
 procedure load_mugen_config();
-procedure autoload();
 var Form1: TForm1;
 
 implementation
@@ -74,11 +74,7 @@ end;
 
 procedure interface_setup();
 begin
-Form1.OpenDialog1.Title:='Open a mugen config file';
-Form1.SaveDialog1.Title:='Save a mugen config file';
-Form1.OpenDialog1.Filter:='Mugen config files|*.def;*.cns;*.air;*.cmd;*.cfg';
 Form1.OpenDialog1.FileName:='';
-Form1.SaveDialog1.Filter:='Game setting|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation setting|*.air|AI setting|*.cmd';
 Form1.Memo1.ScrollBars:=ssBoth;
 Form1.MainMenu1.Items.Items[0].Items[0].ShortCut:=TextToShortCut('Ctrl+N');
 Form1.MainMenu1.Items.Items[0].Items[1].ShortCut:=TextToShortCut('Ctrl+O');
@@ -88,6 +84,14 @@ Form1.MainMenu1.Items.Items[1].Items[0].ShortCut:=TextToShortCut('Ctrl+C');
 Form1.MainMenu1.Items.Items[1].Items[1].ShortCut:=TextToShortCut('Ctrl+V');
 Form1.MainMenu1.Items.Items[1].Items[2].ShortCut:=TextToShortCut('Ctrl+X');
 Form1.Memo1.Lines.Clear();
+end;
+
+procedure dialog_setup();
+begin
+Form1.OpenDialog1.Title:='Open a mugen config file';
+Form1.SaveDialog1.Title:='Save a mugen config file';
+Form1.OpenDialog1.Filter:='Mugen config files|*.def;*.cns;*.air;*.cmd;*.cfg';
+Form1.SaveDialog1.Filter:='Game setting|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation setting|*.air|AI setting|*.cmd';
 end;
 
 function get_file_extension(filter:Byte):string;
@@ -129,16 +133,6 @@ end;
 
 end;
 
-procedure autoload();
-begin
-if ParamCount()>0 then
-begin
-Form1.OpenDialog1.FileName:=ParamStr(1);
-load_mugen_config();
-end;
-
-end;
-
 {$R *.lfm}
 
 { TForm1 }
@@ -147,8 +141,8 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
 window_setup();
 interface_setup();
+dialog_setup();
 window_resize();
-autoload();
 end;
 
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -171,7 +165,7 @@ end;
 
 procedure TForm1.MenuItem11Click(Sender: TObject);
 begin
-ShowMessage('Mugen config editor.Version 1.7.1. 2007-2015 years.Created by Popov Evgeniy Alekseyevich');
+ShowMessage('Mugen config editor.Version 1.7.4. 2007-2018 years.This software made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TForm1.MenuItem2Click(Sender: TObject);
