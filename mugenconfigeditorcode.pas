@@ -6,7 +6,7 @@ interface
 
 uses
   Classes,LCLProc,LCLType,SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Menus;
+  Menus, LazFileUtils;
 
 type
 
@@ -165,7 +165,7 @@ end;
 
 procedure TForm1.MenuItem11Click(Sender: TObject);
 begin
-ShowMessage('Mugen config editor.Version 1.7.4. 2007-2018 years.This software made by Popov Evgeniy Alekseyevich');
+ShowMessage('Mugen config editor.Version 1.7.5. 2007-2019 years.This software made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TForm1.MenuItem2Click(Sender: TObject);
