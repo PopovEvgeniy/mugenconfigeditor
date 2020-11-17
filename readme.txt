@@ -1,6 +1,6 @@
                                 MUGEN CONFIG EDITOR
 
-                                  Version 1.7.5
+                                  Version 1.7.6
 
                          This software made by Popov Evgeniy Alekseyevich
 
@@ -34,7 +34,7 @@ You can send me a letter to tuzik87@inbox.ru
 About program modification
 
 Source code is included in source.zip archive.
-It can be compiled under Lazarus 2.0 or higher.
+It can be compiled under Lazarus 2.0.10 or higher.
 
 Change log
 
@@ -45,3 +45,4 @@ Change log
 1.7.2 - System integration was removed.
 1.7.3 - 1.7.4 - Small changes.
 1.7.5 - Source code was adapted to new version of Lazarus.
+1.7.6 - Small changes.

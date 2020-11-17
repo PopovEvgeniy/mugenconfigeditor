@@ -68,22 +68,22 @@ end;
 
 procedure window_resize();
 begin
-Form1.Memo1.Width:=Form1.ClientWidth-10;
-Form1.Memo1.Height:=Form1.ClientHeight-10;
+ Form1.Memo1.Width:=Form1.ClientWidth-10;
+ Form1.Memo1.Height:=Form1.ClientHeight-10;
 end;
 
 procedure interface_setup();
 begin
-Form1.OpenDialog1.FileName:='';
-Form1.Memo1.ScrollBars:=ssBoth;
-Form1.MainMenu1.Items.Items[0].Items[0].ShortCut:=TextToShortCut('Ctrl+N');
-Form1.MainMenu1.Items.Items[0].Items[1].ShortCut:=TextToShortCut('Ctrl+O');
-Form1.MainMenu1.Items.Items[0].Items[2].ShortCut:=TextToShortCut('Ctrl+S');
-Form1.MainMenu1.Items.Items[0].Items[3].ShortCut:=TextToShortCut('Ctrl+Alt+S');
-Form1.MainMenu1.Items.Items[1].Items[0].ShortCut:=TextToShortCut('Ctrl+C');
-Form1.MainMenu1.Items.Items[1].Items[1].ShortCut:=TextToShortCut('Ctrl+V');
-Form1.MainMenu1.Items.Items[1].Items[2].ShortCut:=TextToShortCut('Ctrl+X');
-Form1.Memo1.Lines.Clear();
+ Form1.OpenDialog1.FileName:='';
+ Form1.Memo1.ScrollBars:=ssBoth;
+ Form1.MainMenu1.Items.Items[0].Items[0].ShortCut:=TextToShortCut('Ctrl+N');
+ Form1.MainMenu1.Items.Items[0].Items[1].ShortCut:=TextToShortCut('Ctrl+O');
+ Form1.MainMenu1.Items.Items[0].Items[2].ShortCut:=TextToShortCut('Ctrl+S');
+ Form1.MainMenu1.Items.Items[0].Items[3].ShortCut:=TextToShortCut('Ctrl+Alt+S');
+ Form1.MainMenu1.Items.Items[1].Items[0].ShortCut:=TextToShortCut('Ctrl+C');
+ Form1.MainMenu1.Items.Items[1].Items[1].ShortCut:=TextToShortCut('Ctrl+V');
+ Form1.MainMenu1.Items.Items[1].Items[2].ShortCut:=TextToShortCut('Ctrl+X');
+ Form1.Memo1.Lines.Clear();
 end;
 
 procedure dialog_setup();
@@ -97,39 +97,40 @@ end;
 function get_file_extension(filter:Byte):string;
 var extension:array[1..5] of string=('.def','.cfg','.cns','.air','.cmd');
 begin
-get_file_extension:=extension[filter];
+ get_file_extension:=extension[filter];
 end;
 
 function check_format(name:string):boolean;
 var extension:string;
-var filter:Byte;
+var filter:array[0..4] of string=('.def','.cfg','.cns','.air','.cmd');
+var current:string;
 var status:boolean;
 begin
-status:=false;
-extension:=ExtractFileExt(name);
-for filter:=1 to 5 do
-begin
-if extension=get_file_extension(filter) then
-begin
-status:=true;
-break;
-end;
+ status:=false;
+ extension:=ExtractFileExt(name);
+ for current in filter do
+ begin
+  if extension=current then
+  begin
+   status:=true;
+   break;
+  end;
 
-end;
-check_format:=status;
+ end;
+ check_format:=status;
 end;
 
 procedure load_mugen_config();
 begin
-if check_format(Form1.OpenDialog1.FileName)=false then
-begin
-ShowMessage('Unsupported file type');
-Form1.OpenDialog1.FileName:='';
-end
-else
-begin
-Form1.Memo1.Lines.LoadFromFile(Form1.OpenDialog1.FileName);
-end;
+ if check_format(Form1.OpenDialog1.FileName)=false then
+ begin
+  ShowMessage('Unsupported file type');
+  Form1.OpenDialog1.FileName:='';
+ end
+ else
+ begin
+  Form1.Memo1.Lines.LoadFromFile(Form1.OpenDialog1.FileName);
+ end;
 
 end;
 
@@ -139,88 +140,88 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-window_setup();
-interface_setup();
-dialog_setup();
-window_resize();
+ window_setup();
+ interface_setup();
+ dialog_setup();
+ window_resize();
 end;
 
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-if Form1.OpenDialog1.FileName<>'' then
-begin
-Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
-end
-else
-begin
-if Application.MessageBox('Do you want to save unsaved file?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then Form1.SaveDialog1.Execute();
-end;
+ if Form1.OpenDialog1.FileName<>'' then
+ begin
+  Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
+ end
+ else
+ begin
+  if Application.MessageBox('Do you want to save unsaved file?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then Form1.SaveDialog1.Execute();
+ end;
 
 end;
 
 procedure TForm1.FormResize(Sender: TObject);
 begin
-window_resize();
+ window_resize();
 end;
 
 procedure TForm1.MenuItem11Click(Sender: TObject);
 begin
-ShowMessage('Mugen config editor.Version 1.7.5. 2007-2019 years.This software made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor.Version 1.7.6. 2007-2020 years.This software made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TForm1.MenuItem2Click(Sender: TObject);
 begin
-Form1.OpenDialog1.FileName:='';
-Form1.Memo1.Lines.Clear();
+ Form1.OpenDialog1.FileName:='';
+ Form1.Memo1.Lines.Clear();
 end;
 
 procedure TForm1.MenuItem3Click(Sender: TObject);
 begin
-Form1.OpenDialog1.Execute();
+ Form1.OpenDialog1.Execute();
 end;
 
 procedure TForm1.MenuItem4Click(Sender: TObject);
 begin
-if Form1.OpenDialog1.FileName<>'' then
-begin
-Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
-end
-else
-begin
-Form1.SaveDialog1.Execute();
-end;
+ if Form1.OpenDialog1.FileName<>'' then
+ begin
+  Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
+ end
+ else
+ begin
+  Form1.SaveDialog1.Execute();
+ end;
 
 end;
 
 procedure TForm1.MenuItem5Click(Sender: TObject);
 begin
-Form1.SaveDialog1.Execute();
+ Form1.SaveDialog1.Execute();
 end;
 
 procedure TForm1.MenuItem7Click(Sender: TObject);
 begin
-Form1.Memo1.CopyToClipboard();
+ Form1.Memo1.CopyToClipboard();
 end;
 
 procedure TForm1.MenuItem8Click(Sender: TObject);
 begin
-Form1.Memo1.PasteFromClipboard();
+ Form1.Memo1.PasteFromClipboard();
 end;
 
 procedure TForm1.MenuItem9Click(Sender: TObject);
 begin
-Form1.Memo1.CutToClipboard();
+ Form1.Memo1.CutToClipboard();
 end;
 
 procedure TForm1.OpenDialog1CanClose(Sender: TObject; var CanClose: boolean);
 begin
-Form1.Memo1.Lines.LoadFromFile(Form1.OpenDialog1.FileName);
+ Form1.Memo1.Lines.LoadFromFile(Form1.OpenDialog1.FileName);
 end;
 
 procedure TForm1.SaveDialog1CanClose(Sender: TObject; var CanClose: boolean);
 begin
-Form1.OpenDialog1.FileName:=ExtractFileNameWithoutExt(Form1.SaveDialog1.FileName)+get_file_extension(Form1.SaveDialog1.FilterIndex);
-Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
+ Form1.OpenDialog1.FileName:=ExtractFileNameWithoutExt(Form1.SaveDialog1.FileName)+get_file_extension(Form1.SaveDialog1.FilterIndex);
+ Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
 end;
 
 end.
