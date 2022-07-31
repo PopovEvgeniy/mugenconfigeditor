@@ -47,13 +47,6 @@ type
     { public declarations }
   end;
 
-procedure window_setup();
-procedure window_resize();
-procedure interface_setup();
-procedure dialog_setup();
-function get_file_extension(filter:Byte):string;
-function check_format(name:string):boolean;
-procedure load_mugen_config();
 var Form1: TForm1;
 
 implementation
@@ -100,40 +93,6 @@ begin
  get_file_extension:=extension[filter];
 end;
 
-function check_format(name:string):boolean;
-var extension:string;
-var filter:array[0..4] of string=('.def','.cfg','.cns','.air','.cmd');
-var current:string;
-var status:boolean;
-begin
- status:=false;
- extension:=ExtractFileExt(name);
- for current in filter do
- begin
-  if extension=current then
-  begin
-   status:=true;
-   break;
-  end;
-
- end;
- check_format:=status;
-end;
-
-procedure load_mugen_config();
-begin
- if check_format(Form1.OpenDialog1.FileName)=false then
- begin
-  ShowMessage('Unsupported file type');
-  Form1.OpenDialog1.FileName:='';
- end
- else
- begin
-  Form1.Memo1.Lines.LoadFromFile(Form1.OpenDialog1.FileName);
- end;
-
-end;
-
 {$R *.lfm}
 
 { TForm1 }
@@ -166,7 +125,7 @@ end;
 
 procedure TForm1.MenuItem11Click(Sender: TObject);
 begin
- ShowMessage('Mugen config editor.Version 1.7.6. 2007-2020 years.This software made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor.Version 1.7.7. 2007-2022 years.This software made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TForm1.MenuItem2Click(Sender: TObject);
