@@ -1,13 +1,13 @@
                                 MUGEN CONFIG EDITOR
 
-                                  Version 1.7.7
+                                  Version 1.7.7.1
 
                          This software made by Popov Evgeniy Alekseyevich
 
 System requirement
 
-Windows 98 or higher for 32 bit system
-Windows Vista or higher for 64 bit system
+Windows 98 or higher for 32-bit system
+Windows Vista or higher for 64-bit system
 
 Program description
 
@@ -46,3 +46,4 @@ Change log
 1.7.3 - 1.7.4 - Small changes.
 1.7.5 - Source code adapted to new version of Lazarus.
 1.7.6 - 1.7.7 - Small changes.
+1.7.7.1 - Documentation updated.
