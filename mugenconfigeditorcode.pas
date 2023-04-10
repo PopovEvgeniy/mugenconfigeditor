@@ -5,7 +5,7 @@ unit mugenconfigeditorcode;
 interface
 
 uses
-  Classes,LCLProc,LCLType,SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes,LCLProc,LCLType,SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Menus, LazFileUtils;
 
 type
@@ -87,7 +87,7 @@ Form1.OpenDialog1.Filter:='Mugen config files|*.def;*.cns;*.air;*.cmd;*.cfg';
 Form1.SaveDialog1.Filter:='Game setting|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation setting|*.air|AI setting|*.cmd';
 end;
 
-function get_file_extension(filter:Byte):string;
+function get_file_extension(const filter:Byte):string;
 var extension:array[1..5] of string=('.def','.cfg','.cns','.air','.cmd');
 begin
  get_file_extension:=extension[filter];
@@ -113,7 +113,7 @@ begin
  end
  else
  begin
-  if Application.MessageBox('Do you want to save unsaved file?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then Form1.SaveDialog1.Execute();
+  if Application.MessageBox('Do you want to save an unsaved file?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then Form1.SaveDialog1.Execute();
  end;
 
 end;
@@ -125,7 +125,7 @@ end;
 
 procedure TForm1.MenuItem11Click(Sender: TObject);
 begin
- ShowMessage('Mugen config editor.Version 1.7.7. 2007-2022 years.This software made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor.Version 1.7.8. 2007-2023 years.This software made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TForm1.MenuItem2Click(Sender: TObject);

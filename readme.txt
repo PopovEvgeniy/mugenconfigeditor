@@ -1,17 +1,17 @@
                                 MUGEN CONFIG EDITOR
 
-                                  Version 1.7.7.1
+                                  Version 1.7.8
 
                          This software made by Popov Evgeniy Alekseyevich
 
 System requirement
 
-Windows 98 or higher for 32-bit system
+Windows 2000 or higher for 32-bit system
 Windows Vista or higher for 64-bit system
 
 Program description
 
-This program is a simple editor for edit mugen configuration files.
+This program is a simple editor for mugen configuration files.
 
 Supported file types
 
@@ -34,7 +34,7 @@ You can send me a letter to tuzik87@inbox.ru
 About program modification
 
 Source code included in source.zip archive.
-It can be compiled under Lazarus 2.2.2 or higher.
+It can be compiled under Lazarus 2.2.6 or higher.
 
 Change log
 
@@ -47,3 +47,4 @@ Change log
 1.7.5 - Source code adapted to new version of Lazarus.
 1.7.6 - 1.7.7 - Small changes.
 1.7.7.1 - Documentation updated.
+1.7.8 - Small changes.
