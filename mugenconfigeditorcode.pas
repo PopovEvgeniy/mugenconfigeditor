@@ -125,7 +125,7 @@ end;
 
 procedure TForm1.MenuItem11Click(Sender: TObject);
 begin
- ShowMessage('Mugen config editor.Version 1.7.8. 2007-2023 years.This software made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor.Version 1.7.9. 2007-2024 years.This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TForm1.MenuItem2Click(Sender: TObject);
