@@ -1,6 +1,6 @@
                                 MUGEN CONFIG EDITOR
 
-                                  Version 1.7.9.1
+                                  Version 1.7.9.2
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -41,13 +41,13 @@ Change log
 1.0-1.6.6: The old builds.
 1.6.7: The program was totally rewritten.
 1.6.8-1.7.1: The small changes in the source code.
-1.7.1.0.1: Documentation updated.
-1.7.2: The system integration is removed.
+1.7.1.0.1: The documentation has been updated.
+1.7.2: The system integration has been removed.
 1.7.3-1.7.4: The small changes.
-1.7.5: The source code adapted to the new version of Lazarus.
+1.7.5: The source code has been adapted to the new version of Lazarus.
 1.7.6-1.7.7: The small changes.
-1.7.7.1: Documentation updated.
+1.7.7.1: The documentation has been updated.
 1.7.8: The small changes.
-1.7.8.1: Documentation updated.
+1.7.8.1: The documentation has been updated.
 1.7.9: The small changes.
-1.7.9.1: Documentation updated.
+1.7.9.1-1.7.9.2: The documentation has been updated.
