@@ -10,81 +10,81 @@ uses
 
 type
 
-  { TForm1 }
+  { TMainWindow }
 
-    TForm1 = class(TForm)
-    MainMenu1: TMainMenu;
-    Memo1: TMemo;
-    MenuItem1: TMenuItem;
-    MenuItem10: TMenuItem;
-    MenuItem11: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
-    MenuItem6: TMenuItem;
-    MenuItem7: TMenuItem;
-    MenuItem8: TMenuItem;
-    MenuItem9: TMenuItem;
-    OpenDialog1: TOpenDialog;
-    SaveDialog1: TSaveDialog;
+    TMainWindow = class(TForm)
+    MainMenu: TMainMenu;
+    Editor: TMemo;
+    FileMenu: TMenuItem;
+    HelpMenu: TMenuItem;
+    AboutMenuItem: TMenuItem;
+    NewMenuItem: TMenuItem;
+    OpenMenuItem: TMenuItem;
+    SaveMenuItem: TMenuItem;
+    SaveAsMenuItem: TMenuItem;
+    ClipboardMenu: TMenuItem;
+    CopyMenuItem: TMenuItem;
+    PasteMenuItem: TMenuItem;
+    CutMenuItem: TMenuItem;
+    OpenDialog: TOpenDialog;
+    SaveDialog: TSaveDialog;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure MenuItem11Click(Sender: TObject);
-    procedure MenuItem2Click(Sender: TObject);
-    procedure MenuItem3Click(Sender: TObject);
-    procedure MenuItem4Click(Sender: TObject);
-    procedure MenuItem5Click(Sender: TObject);
-    procedure MenuItem7Click(Sender: TObject);
-    procedure MenuItem8Click(Sender: TObject);
-    procedure MenuItem9Click(Sender: TObject);
-    procedure OpenDialog1CanClose(Sender: TObject; var CanClose: boolean);
-    procedure SaveDialog1CanClose(Sender: TObject; var CanClose: boolean);
+    procedure AboutMenuItemClick(Sender: TObject);
+    procedure NewMenuItemClick(Sender: TObject);
+    procedure OpenMenuItemClick(Sender: TObject);
+    procedure SaveMenuItemClick(Sender: TObject);
+    procedure SaveAsMenuItemClick(Sender: TObject);
+    procedure CopyMenuItemClick(Sender: TObject);
+    procedure PasteMenuItemClick(Sender: TObject);
+    procedure CutMenuItemClick(Sender: TObject);
+    procedure OpenDialogCanClose(Sender: TObject; var CanClose: boolean);
+    procedure SaveDialogCanClose(Sender: TObject; var CanClose: boolean);
   private
     { private declarations }
   public
     { public declarations }
   end;
 
-var Form1: TForm1;
+var MainWindow: TMainWindow;
 
 implementation
 
 procedure window_setup();
 begin
- Application.Title:='MUGEN CONFIG EDITOR';
- Form1.Caption:='MUGEN CONFIG EDITOR';
- Form1.Font.Name:=Screen.MenuFont.Name;
- Form1.Font.Size:=14;
+ Application.Title:='Mugen config editor';
+ MainWindow.Caption:=Application.Title;
+ MainWindow.Font.Name:=Screen.MenuFont.Name;
+ MainWindow.Font.Size:=14;
 end;
 
 procedure window_resize();
 begin
- Form1.Memo1.Width:=Form1.ClientWidth-10;
- Form1.Memo1.Height:=Form1.ClientHeight-10;
+ MainWindow.Editor.Width:=MainWindow.ClientWidth-10;
+ MainWindow.Editor.Height:=MainWindow.ClientHeight-10;
 end;
 
 procedure interface_setup();
 begin
- Form1.OpenDialog1.FileName:='';
- Form1.Memo1.ScrollBars:=ssBoth;
- Form1.MainMenu1.Items.Items[0].Items[0].ShortCut:=TextToShortCut('Ctrl+N');
- Form1.MainMenu1.Items.Items[0].Items[1].ShortCut:=TextToShortCut('Ctrl+O');
- Form1.MainMenu1.Items.Items[0].Items[2].ShortCut:=TextToShortCut('Ctrl+S');
- Form1.MainMenu1.Items.Items[0].Items[3].ShortCut:=TextToShortCut('Ctrl+Alt+S');
- Form1.MainMenu1.Items.Items[1].Items[0].ShortCut:=TextToShortCut('Ctrl+C');
- Form1.MainMenu1.Items.Items[1].Items[1].ShortCut:=TextToShortCut('Ctrl+V');
- Form1.MainMenu1.Items.Items[1].Items[2].ShortCut:=TextToShortCut('Ctrl+X');
- Form1.Memo1.Lines.Clear();
+ MainWindow.OpenDialog.FileName:='';
+ MainWindow.Editor.ScrollBars:=ssBoth;
+ MainWindow.MainMenu.Items.Items[0].Items[0].ShortCut:=TextToShortCut('Ctrl+N');
+ MainWindow.MainMenu.Items.Items[0].Items[1].ShortCut:=TextToShortCut('Ctrl+O');
+ MainWindow.MainMenu.Items.Items[0].Items[2].ShortCut:=TextToShortCut('Ctrl+S');
+ MainWindow.MainMenu.Items.Items[0].Items[3].ShortCut:=TextToShortCut('Ctrl+Alt+S');
+ MainWindow.MainMenu.Items.Items[1].Items[0].ShortCut:=TextToShortCut('Ctrl+C');
+ MainWindow.MainMenu.Items.Items[1].Items[1].ShortCut:=TextToShortCut('Ctrl+V');
+ MainWindow.MainMenu.Items.Items[1].Items[2].ShortCut:=TextToShortCut('Ctrl+X');
+ MainWindow.Editor.Lines.Clear();
 end;
 
 procedure dialog_setup();
 begin
-Form1.OpenDialog1.Title:='Open a mugen config file';
-Form1.SaveDialog1.Title:='Save a mugen config file';
-Form1.OpenDialog1.Filter:='Mugen config files|*.def;*.cns;*.air;*.cmd;*.cfg';
-Form1.SaveDialog1.Filter:='Game setting|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation setting|*.air|AI setting|*.cmd';
+MainWindow.OpenDialog.Title:='Open a mugen config file';
+MainWindow.SaveDialog.Title:='Save a mugen config file';
+MainWindow.OpenDialog.Filter:='Mugen config files|*.def;*.cns;*.air;*.cmd;*.cfg';
+MainWindow.SaveDialog.Filter:='Game settings|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation settings|*.air|AI settings|*.cmd';
 end;
 
 function get_file_extension(const filter:Byte):string;
@@ -95,9 +95,9 @@ end;
 
 {$R *.lfm}
 
-{ TForm1 }
+{ TMainWindow }
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TMainWindow.FormCreate(Sender: TObject);
 begin
  window_setup();
  interface_setup();
@@ -105,82 +105,82 @@ begin
  window_resize();
 end;
 
-procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+procedure TMainWindow.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
- if Form1.OpenDialog1.FileName<>'' then
+ if MainWindow.OpenDialog.FileName<>'' then
  begin
-  Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
+  MainWindow.Editor.Lines.SaveToFile(MainWindow.OpenDialog.FileName);
  end
  else
  begin
-  if Application.MessageBox('Do you want to save an unsaved file?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then Form1.SaveDialog1.Execute();
+  if Application.MessageBox('Do you want to save an unsaved file?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then MainWindow.SaveDialog.Execute();
  end;
 
 end;
 
-procedure TForm1.FormResize(Sender: TObject);
+procedure TMainWindow.FormResize(Sender: TObject);
 begin
  window_resize();
 end;
 
-procedure TForm1.MenuItem11Click(Sender: TObject);
+procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 1.8. 2007-2024 years.This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 1.8.1. 2007-2025 years.This software was made by Popov Evgeniy Alekseyevich');
 end;
 
-procedure TForm1.MenuItem2Click(Sender: TObject);
+procedure TMainWindow.NewMenuItemClick(Sender: TObject);
 begin
- Form1.OpenDialog1.FileName:='';
- Form1.Memo1.Lines.Clear();
+ MainWindow.OpenDialog.FileName:='';
+ MainWindow.Editor.Lines.Clear();
 end;
 
-procedure TForm1.MenuItem3Click(Sender: TObject);
+procedure TMainWindow.OpenMenuItemClick(Sender: TObject);
 begin
- Form1.OpenDialog1.Execute();
+ MainWindow.OpenDialog.Execute();
 end;
 
-procedure TForm1.MenuItem4Click(Sender: TObject);
+procedure TMainWindow.SaveMenuItemClick(Sender: TObject);
 begin
- if Form1.OpenDialog1.FileName<>'' then
+ if MainWindow.OpenDialog.FileName<>'' then
  begin
-  Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
+  MainWindow.Editor.Lines.SaveToFile(MainWindow.OpenDialog.FileName);
  end
  else
  begin
-  Form1.SaveDialog1.Execute();
+  MainWindow.SaveDialog.Execute();
  end;
 
 end;
 
-procedure TForm1.MenuItem5Click(Sender: TObject);
+procedure TMainWindow.SaveAsMenuItemClick(Sender: TObject);
 begin
- Form1.SaveDialog1.Execute();
+ MainWindow.SaveDialog.Execute();
 end;
 
-procedure TForm1.MenuItem7Click(Sender: TObject);
+procedure TMainWindow.CopyMenuItemClick(Sender: TObject);
 begin
- Form1.Memo1.CopyToClipboard();
+ MainWindow.Editor.CopyToClipboard();
 end;
 
-procedure TForm1.MenuItem8Click(Sender: TObject);
+procedure TMainWindow.PasteMenuItemClick(Sender: TObject);
 begin
- Form1.Memo1.PasteFromClipboard();
+ MainWindow.Editor.PasteFromClipboard();
 end;
 
-procedure TForm1.MenuItem9Click(Sender: TObject);
+procedure TMainWindow.CutMenuItemClick(Sender: TObject);
 begin
- Form1.Memo1.CutToClipboard();
+ MainWindow.Editor.CutToClipboard();
 end;
 
-procedure TForm1.OpenDialog1CanClose(Sender: TObject; var CanClose: boolean);
+procedure TMainWindow.OpenDialogCanClose(Sender: TObject; var CanClose: boolean);
 begin
- Form1.Memo1.Lines.LoadFromFile(Form1.OpenDialog1.FileName);
+ MainWindow.Editor.Lines.LoadFromFile(MainWindow.OpenDialog.FileName);
 end;
 
-procedure TForm1.SaveDialog1CanClose(Sender: TObject; var CanClose: boolean);
+procedure TMainWindow.SaveDialogCanClose(Sender: TObject; var CanClose: boolean);
 begin
- Form1.OpenDialog1.FileName:=ExtractFileNameWithoutExt(Form1.SaveDialog1.FileName)+get_file_extension(Form1.SaveDialog1.FilterIndex);
- Form1.Memo1.Lines.SaveToFile(Form1.OpenDialog1.FileName);
+ MainWindow.OpenDialog.FileName:=ExtractFileNameWithoutExt(MainWindow.SaveDialog.FileName)+get_file_extension(MainWindow.SaveDialog.FilterIndex);
+ MainWindow.Editor.Lines.SaveToFile(MainWindow.OpenDialog.FileName);
 end;
 
 end.

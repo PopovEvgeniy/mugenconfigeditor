@@ -1,6 +1,6 @@
-                                MUGEN CONFIG EDITOR
+                                Mugen config editor
 
-                                  Version 1.8
+                                  Version 1.8.1
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -17,11 +17,11 @@ Supported file types
 
 This program can work with the following file types:
 
-def: game setting
+def: Game settings
 cfg: Configuration files
 cns: Character definitive
-air: animation setting
-cmd: AI setting
+air: Animation settings
+cmd: AI settings
 
 License
 
@@ -34,7 +34,7 @@ You can send me a letter at tuzik87@inbox.ru.
 About program modification
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 4.0 RC1 or higher.
+It can be compiled under Lazarus 4.0 RC3 or higher.
 
 Change log
 
@@ -52,3 +52,4 @@ Change log
 1.7.9: The small changes.
 1.7.9.1-1.7.9.2: The documentation has been updated.
 1.8: The source code was recompiled under Lazarus 4.0 RC1.
+1.8.1: The source code was recompiled under Lazarus 4.0 RC3.

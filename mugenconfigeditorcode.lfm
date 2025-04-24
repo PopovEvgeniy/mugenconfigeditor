@@ -1,17 +1,16 @@
-object Form1: TForm1
+object MainWindow: TMainWindow
   Left = 234
   Height = 262
   Top = 134
   Width = 320
-  Caption = 'Form1'
+  Caption = 'Mugen config editor'
   ClientHeight = 262
   ClientWidth = 320
-  Menu = MainMenu1
-  LCLVersion = '4.0.0.1'
+  Menu = MainMenu
   OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize
-  object Memo1: TMemo
+  object Editor: TMemo
     Left = 8
     Height = 240
     Top = 0
@@ -22,58 +21,58 @@ object Form1: TForm1
     TabOrder = 0
     WordWrap = False
   end
-  object OpenDialog1: TOpenDialog
-    OnCanClose = OpenDialog1CanClose
+  object OpenDialog: TOpenDialog
+    OnCanClose = OpenDialogCanClose
     Left = 272
     Top = 80
   end
-  object SaveDialog1: TSaveDialog
-    OnCanClose = SaveDialog1CanClose
+  object SaveDialog: TSaveDialog
+    OnCanClose = SaveDialogCanClose
     Left = 272
     Top = 144
   end
-  object MainMenu1: TMainMenu
+  object MainMenu: TMainMenu
     Left = 272
     Top = 192
-    object MenuItem1: TMenuItem
+    object FileMenu: TMenuItem
       Caption = 'File'
-      object MenuItem2: TMenuItem
+      object NewMenuItem: TMenuItem
         Caption = 'New'
-        OnClick = MenuItem2Click
+        OnClick = NewMenuItemClick
       end
-      object MenuItem3: TMenuItem
+      object OpenMenuItem: TMenuItem
         Caption = 'Open'
-        OnClick = MenuItem3Click
+        OnClick = OpenMenuItemClick
       end
-      object MenuItem4: TMenuItem
+      object SaveMenuItem: TMenuItem
         Caption = 'Save'
-        OnClick = MenuItem4Click
+        OnClick = SaveMenuItemClick
       end
-      object MenuItem5: TMenuItem
+      object SaveAsMenuItem: TMenuItem
         Caption = 'Save as'
-        OnClick = MenuItem5Click
+        OnClick = SaveAsMenuItemClick
       end
     end
-    object MenuItem6: TMenuItem
+    object ClipboardMenu: TMenuItem
       Caption = 'Clipboard'
-      object MenuItem7: TMenuItem
+      object CopyMenuItem: TMenuItem
         Caption = 'Copy'
-        OnClick = MenuItem7Click
+        OnClick = CopyMenuItemClick
       end
-      object MenuItem8: TMenuItem
+      object PasteMenuItem: TMenuItem
         Caption = 'Paste'
-        OnClick = MenuItem8Click
+        OnClick = PasteMenuItemClick
       end
-      object MenuItem9: TMenuItem
+      object CutMenuItem: TMenuItem
         Caption = 'Cut'
-        OnClick = MenuItem9Click
+        OnClick = CutMenuItemClick
       end
     end
-    object MenuItem10: TMenuItem
+    object HelpMenu: TMenuItem
       Caption = 'Help'
-      object MenuItem11: TMenuItem
+      object AboutMenuItem: TMenuItem
         Caption = 'About this program'
-        OnClick = MenuItem11Click
+        OnClick = AboutMenuItemClick
       end
     end
   end
