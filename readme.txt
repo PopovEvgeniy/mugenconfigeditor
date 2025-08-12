@@ -1,6 +1,6 @@
                                 Mugen config editor
 
-                                  Version 1.8.1
+                                  Version 1.8.1.1
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -25,11 +25,7 @@ cmd: AI settings
 
 License
 
-This program is distributed under GNU GENERAL PUBLIC LICENSE.
-
-Contact
-
-You can send me a letter at tuzik87@inbox.ru.
+This program is distributed under the GNU GENERAL PUBLIC LICENSE.
 
 About program modification
 
@@ -53,3 +49,4 @@ Change log
 1.7.9.1-1.7.9.2: The documentation has been updated.
 1.8: The source code was recompiled under Lazarus 4.0 RC1.
 1.8.1: The source code was recompiled under Lazarus 4.0 RC3.
+1.8.1.1: The documentation has been updated.
