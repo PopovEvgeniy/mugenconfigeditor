@@ -125,7 +125,7 @@ end;
 
 procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 1.8.1. 2007-2025 years.This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 1.8.2. 2007-2025 years.This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TMainWindow.NewMenuItemClick(Sender: TObject);

@@ -7,6 +7,7 @@ object MainWindow: TMainWindow
   ClientHeight = 262
   ClientWidth = 320
   Menu = MainMenu
+  LCLVersion = '4.2.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize

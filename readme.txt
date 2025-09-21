@@ -1,38 +1,28 @@
                                 Mugen config editor
 
-                                  Version 1.8.1.1
+                                  Version 1.8.2
 
                          This software was made by Popov Evgeniy Alekseyevich
 
-System requirements
+System requirements.
 
 Windows 2000 or higher for 32-bit systems
 Windows Vista or higher for 64-bit systems
 
-Program description
+The program description.
 
 This program is a simple editor for MUGEN configuration files.
 
-Supported file types
-
-This program can work with the following file types:
-
-def: Game settings
-cfg: Configuration files
-cns: Character definitive
-air: Animation settings
-cmd: AI settings
-
-License
+License.
 
 This program is distributed under the GNU GENERAL PUBLIC LICENSE.
 
-About program modification
+The source code.
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 4.0 RC3 or higher.
+It can be compiled under Lazarus 4.2 or higher.
 
-Change log
+Version history.
 
 1.0-1.6.6: The old builds.
 1.6.7: The program was totally rewritten.
@@ -50,3 +40,4 @@ Change log
 1.8: The source code was recompiled under Lazarus 4.0 RC1.
 1.8.1: The source code was recompiled under Lazarus 4.0 RC3.
 1.8.1.1: The documentation has been updated.
+1.8.2: The source code was recompiled under Lazarus 4.2.
