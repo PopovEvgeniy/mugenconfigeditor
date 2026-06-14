@@ -1,6 +1,6 @@
                                 Mugen config editor
 
-                                  Version 1.8.2
+                                  Version 1.8.3
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -20,7 +20,7 @@ This program is distributed under the GNU GENERAL PUBLIC LICENSE.
 The source code.
 
 The code is included in the source.zip archive.
-It can be compiled under Lazarus 4.2 or higher.
+It can be compiled under Lazarus 4.8 or higher.
 
 Version history.
 
@@ -41,3 +41,4 @@ Version history.
 1.8.1: The source code was recompiled under Lazarus 4.0 RC3.
 1.8.1.1: The documentation has been updated.
 1.8.2: The source code was recompiled under Lazarus 4.2.
+1.8.3: The small changes.
