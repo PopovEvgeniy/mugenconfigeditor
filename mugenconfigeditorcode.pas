@@ -45,6 +45,8 @@ type
     procedure CutMenuItemClick(Sender: TObject);
     procedure SaveDialogCanClose(Sender: TObject; var CanClose: boolean);
   private
+    document:string;
+    procedure create_new_file();
     procedure load_file(const target:string);
     procedure save_file(const target:string);
     procedure window_setup();
@@ -66,10 +68,17 @@ begin
  get_file_extension:=extension[filter];
 end;
 
+procedure TMainWindow.create_new_file();
+begin
+ Self.Editor.Lines.Clear();
+ Self.document:='';
+end;
+
 procedure TMainWindow.load_file(const target:string);
 begin
  try
   Self.Editor.Lines.LoadFromFile(target);
+  Self.document:=target;
  except
   On E:Exception do ShowMessage(E.Message);
  end;
@@ -80,6 +89,7 @@ procedure TMainWindow.save_file(const target:string);
 begin
  try
   Self.Editor.Lines.SaveToFile(target);
+  Self.document:=target;
  except
   On E:Exception do ShowMessage(E.Message);
  end;
@@ -102,7 +112,6 @@ end;
 
 procedure TMainWindow.interface_setup();
 begin
- Self.OpenDialog.FileName:='';
  Self.Editor.ScrollBars:=ssBoth;
  Self.NewMenuItem.ShortCut:=TextToShortCut('Ctrl+N');
  Self.OpenMenuItem.ShortCut:=TextToShortCut('Ctrl+O');
@@ -111,7 +120,6 @@ begin
  Self.CopyMenuItem.ShortCut:=TextToShortCut('Ctrl+C');
  Self.PasteMenuItem.ShortCut:=TextToShortCut('Ctrl+V');
  Self.CutMenuItem.ShortCut:=TextToShortCut('Ctrl+X');
- Self.Editor.Lines.Clear();
 end;
 
 procedure TMainWindow.dialog_setup();
@@ -128,6 +136,7 @@ begin
  Self.interface_setup();
  Self.dialog_setup();
  Self.window_resize();
+ Self.create_new_file();
 end;
 
 {$R *.lfm}
@@ -141,9 +150,9 @@ end;
 
 procedure TMainWindow.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
- if Self.OpenDialog.FileName<>'' then
+ if Self.document<>'' then
  begin
-  Self.save_file(Self.OpenDialog.FileName);
+  if Self.Editor.Modified=True then Self.save_file(Self.document);
  end
  else
  begin
@@ -159,13 +168,12 @@ end;
 
 procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 1.8.8. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 1.9.1. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TMainWindow.NewMenuItemClick(Sender: TObject);
 begin
- Self.OpenDialog.FileName:='';
- Self.Editor.Lines.Clear();
+ Self.create_new_file();
 end;
 
 procedure TMainWindow.OpenMenuItemClick(Sender: TObject);
@@ -175,9 +183,9 @@ end;
 
 procedure TMainWindow.SaveMenuItemClick(Sender: TObject);
 begin
- if Self.OpenDialog.FileName<>'' then
+ if Self.document<>'' then
  begin
-  Self.save_file(Self.OpenDialog.FileName);
+  Self.save_file(Self.document);
  end
  else
  begin
