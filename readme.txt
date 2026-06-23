@@ -1,6 +1,6 @@
                                 Mugen config editor
 
-                                  Version 1.8.4
+                                  Version 1.8.8
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -42,3 +42,5 @@ Version history.
 1.8.1.1: The documentation has been updated.
 1.8.2: The source code was recompiled under Lazarus 4.2.
 1.8.3-1.8.4: The small changes.
+1.8.5-1.8.6: The small bug has been fixed.
+1.8.7-1.8.8: The small changes.

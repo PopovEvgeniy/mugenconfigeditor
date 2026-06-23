@@ -23,7 +23,6 @@ object MainWindow: TMainWindow
     WordWrap = False
   end
   object OpenDialog: TOpenDialog
-    OnCanClose = OpenDialogCanClose
     Left = 272
     Top = 80
   end

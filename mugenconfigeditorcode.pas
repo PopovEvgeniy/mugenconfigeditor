@@ -43,13 +43,15 @@ type
     procedure CopyMenuItemClick(Sender: TObject);
     procedure PasteMenuItemClick(Sender: TObject);
     procedure CutMenuItemClick(Sender: TObject);
-    procedure OpenDialogCanClose(Sender: TObject; var CanClose: boolean);
     procedure SaveDialogCanClose(Sender: TObject; var CanClose: boolean);
   private
+    procedure load_file(const target:string);
+    procedure save_file(const target:string);
     procedure window_setup();
     procedure window_resize();
     procedure interface_setup();
     procedure dialog_setup();
+    procedure setup();
   public
     { public declarations }
   end;
@@ -62,6 +64,26 @@ function get_file_extension(const filter:Byte):string;
 var extension:array[1..5] of string=('.def','.cfg','.cns','.air','.cmd');
 begin
  get_file_extension:=extension[filter];
+end;
+
+procedure TMainWindow.load_file(const target:string);
+begin
+ try
+  Self.Editor.Lines.LoadFromFile(target);
+ except
+  On E:Exception do ShowMessage(E.Message);
+ end;
+
+end;
+
+procedure TMainWindow.save_file(const target:string);
+begin
+ try
+  Self.Editor.Lines.SaveToFile(target);
+ except
+  On E:Exception do ShowMessage(E.Message);
+ end;
+
 end;
 
 procedure TMainWindow.window_setup();
@@ -94,10 +116,18 @@ end;
 
 procedure TMainWindow.dialog_setup();
 begin
-Self.OpenDialog.Title:='Open a mugen config file';
-Self.SaveDialog.Title:='Save a mugen config file';
-Self.OpenDialog.Filter:='Mugen config files|*.def;*.cns;*.air;*.cmd;*.cfg';
-Self.SaveDialog.Filter:='Game settings|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation settings|*.air|AI settings|*.cmd';
+ Self.OpenDialog.Title:='Open a mugen config file';
+ Self.SaveDialog.Title:='Save a mugen config file';
+ Self.OpenDialog.Filter:='Mugen config files|*.def;*.cns;*.air;*.cmd;*.cfg';
+ Self.SaveDialog.Filter:='Game settings|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation settings|*.air|AI settings|*.cmd';
+end;
+
+procedure TMainWindow.setup();
+begin
+ Self.window_setup();
+ Self.interface_setup();
+ Self.dialog_setup();
+ Self.window_resize();
 end;
 
 {$R *.lfm}
@@ -106,17 +136,14 @@ end;
 
 procedure TMainWindow.FormCreate(Sender: TObject);
 begin
- Self.window_setup();
- Self.interface_setup();
- Self.dialog_setup();
- Self.window_resize();
+ Self.setup();
 end;
 
 procedure TMainWindow.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
  if Self.OpenDialog.FileName<>'' then
  begin
-  Self.Editor.Lines.SaveToFile(Self.OpenDialog.FileName);
+  Self.save_file(Self.OpenDialog.FileName);
  end
  else
  begin
@@ -132,7 +159,7 @@ end;
 
 procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 1.8.4. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 1.8.8. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TMainWindow.NewMenuItemClick(Sender: TObject);
@@ -143,14 +170,14 @@ end;
 
 procedure TMainWindow.OpenMenuItemClick(Sender: TObject);
 begin
- Self.OpenDialog.Execute();
+ if Self.OpenDialog.Execute()=True then Self.load_file(Self.OpenDialog.FileName);
 end;
 
 procedure TMainWindow.SaveMenuItemClick(Sender: TObject);
 begin
  if Self.OpenDialog.FileName<>'' then
  begin
-  Self.Editor.Lines.SaveToFile(Self.OpenDialog.FileName);
+  Self.save_file(Self.OpenDialog.FileName);
  end
  else
  begin
@@ -171,7 +198,12 @@ end;
 
 procedure TMainWindow.PasteMenuItemClick(Sender: TObject);
 begin
- Self.Editor.PasteFromClipboard();
+ try
+  Self.Editor.PasteFromClipboard();
+ except
+  On E:Exception do ShowMessage(E.Message);
+ end;
+
 end;
 
 procedure TMainWindow.CutMenuItemClick(Sender: TObject);
@@ -179,15 +211,10 @@ begin
  Self.Editor.CutToClipboard();
 end;
 
-procedure TMainWindow.OpenDialogCanClose(Sender: TObject; var CanClose: boolean);
-begin
- Self.Editor.Lines.LoadFromFile(Self.OpenDialog.FileName);
-end;
-
 procedure TMainWindow.SaveDialogCanClose(Sender: TObject; var CanClose: boolean);
 begin
  Self.OpenDialog.FileName:=ExtractFileNameWithoutExt(Self.SaveDialog.FileName)+get_file_extension(Self.SaveDialog.FilterIndex);
- Self.Editor.Lines.SaveToFile(Self.OpenDialog.FileName);
+ Self.save_file(Self.OpenDialog.FileName);
 end;
 
 end.
