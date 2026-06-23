@@ -82,13 +82,13 @@ procedure TMainWindow.interface_setup();
 begin
  Self.OpenDialog.FileName:='';
  Self.Editor.ScrollBars:=ssBoth;
- Self.MainMenu.Items.Items[0].Items[0].ShortCut:=TextToShortCut('Ctrl+N');
- Self.MainMenu.Items.Items[0].Items[1].ShortCut:=TextToShortCut('Ctrl+O');
- Self.MainMenu.Items.Items[0].Items[2].ShortCut:=TextToShortCut('Ctrl+S');
- Self.MainMenu.Items.Items[0].Items[3].ShortCut:=TextToShortCut('Ctrl+Alt+S');
- Self.MainMenu.Items.Items[1].Items[0].ShortCut:=TextToShortCut('Ctrl+C');
- Self.MainMenu.Items.Items[1].Items[1].ShortCut:=TextToShortCut('Ctrl+V');
- Self.MainMenu.Items.Items[1].Items[2].ShortCut:=TextToShortCut('Ctrl+X');
+ Self.NewMenuItem.ShortCut:=TextToShortCut('Ctrl+N');
+ Self.OpenMenuItem.ShortCut:=TextToShortCut('Ctrl+O');
+ Self.SaveMenuItem.ShortCut:=TextToShortCut('Ctrl+S');
+ Self.SaveAsMenuItem.ShortCut:=TextToShortCut('Ctrl+Alt+S');
+ Self.CopyMenuItem.ShortCut:=TextToShortCut('Ctrl+C');
+ Self.PasteMenuItem.ShortCut:=TextToShortCut('Ctrl+V');
+ Self.CutMenuItem.ShortCut:=TextToShortCut('Ctrl+X');
  Self.Editor.Lines.Clear();
 end;
 
@@ -132,7 +132,7 @@ end;
 
 procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 1.8.3. 2007-2026 years.This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 1.8.4. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TMainWindow.NewMenuItemClick(Sender: TObject);
