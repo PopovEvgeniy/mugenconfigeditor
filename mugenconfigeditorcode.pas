@@ -78,6 +78,7 @@ procedure TMainWindow.load_file(const target:string);
 begin
  try
   Self.Editor.Lines.LoadFromFile(target);
+  Self.Editor.Modified:=False;
   Self.document:=target;
  except
   On E:Exception do ShowMessage(E.Message);
@@ -89,6 +90,7 @@ procedure TMainWindow.save_file(const target:string);
 begin
  try
   Self.Editor.Lines.SaveToFile(target);
+  Self.Editor.Modified:=False;
   Self.document:=target;
  except
   On E:Exception do ShowMessage(E.Message);
@@ -112,6 +114,7 @@ end;
 
 procedure TMainWindow.interface_setup();
 begin
+ Self.Editor.WordWrap:=False;
  Self.Editor.ScrollBars:=ssBoth;
  Self.NewMenuItem.ShortCut:=TextToShortCut('Ctrl+N');
  Self.OpenMenuItem.ShortCut:=TextToShortCut('Ctrl+O');
@@ -150,13 +153,9 @@ end;
 
 procedure TMainWindow.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
- if Self.document<>'' then
+ if Self.Editor.Modified=True then
  begin
-  if Self.Editor.Modified=True then Self.save_file(Self.document);
- end
- else
- begin
-  if Application.MessageBox('Do you want to save an unsaved file?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then Self.SaveDialog.Execute();
+  if Application.MessageBox('Do you want to save changes?','Save a file',MB_ICONQUESTION+MB_YESNO)=ID_YES then Self.SaveMenuItem.Click();
  end;
 
 end;
@@ -168,7 +167,7 @@ end;
 
 procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 1.9.1. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 1.9.6. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TMainWindow.NewMenuItemClick(Sender: TObject);
@@ -201,7 +200,12 @@ end;
 
 procedure TMainWindow.CopyMenuItemClick(Sender: TObject);
 begin
- Self.Editor.CopyToClipboard();
+ try
+  Self.Editor.CopyToClipboard();
+ except
+  On E:Exception do ShowMessage(E.Message);
+ end;
+
 end;
 
 procedure TMainWindow.PasteMenuItemClick(Sender: TObject);
@@ -216,13 +220,17 @@ end;
 
 procedure TMainWindow.CutMenuItemClick(Sender: TObject);
 begin
- Self.Editor.CutToClipboard();
+ try
+  Self.Editor.CutToClipboard();
+ except
+  On E:Exception do ShowMessage(E.Message);
+ end;
+
 end;
 
 procedure TMainWindow.SaveDialogCanClose(Sender: TObject; var CanClose: boolean);
 begin
- Self.OpenDialog.FileName:=ExtractFileNameWithoutExt(Self.SaveDialog.FileName)+get_file_extension(Self.SaveDialog.FilterIndex);
- Self.save_file(Self.OpenDialog.FileName);
+ Self.save_file(ExtractFileNameWithoutExt(Self.SaveDialog.FileName)+get_file_extension(Self.SaveDialog.FilterIndex));
 end;
 
 end.

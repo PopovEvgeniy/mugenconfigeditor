@@ -1,6 +1,6 @@
                                 Mugen config editor
 
-                                  Version 1.9.1
+                                  Version 1.9.6
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -45,4 +45,8 @@ Version history.
 1.8.5-1.8.6: The small bug has been fixed.
 1.8.7-1.8.8: The small changes.
 1.8.9: The user experience has improved.
-1.9-1.9.1: The small changes.
+1.9-1.9.2: The small changes.
+1.9.3: The user experience has improved.
+1.9.4: The small changes.
+1.9.5: The small bug has been fixed.
+1.9.6: The small changes.
