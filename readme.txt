@@ -1,6 +1,6 @@
                                 Mugen config editor
 
-                                  Version 1.9.6
+                                  Version 2.0
 
                          This software was made by Popov Evgeniy Alekseyevich
 
@@ -15,7 +15,11 @@ This program is a simple editor for MUGEN configuration files.
 
 License.
 
-This program is distributed under the GNU GENERAL PUBLIC LICENSE.
+This program is distributed under the GNU GENERAL PUBLIC LICENSE (Version 2 or higher).
+
+The third-party component.
+
+This software uses the SynEdit control (https://wiki.freepascal.org/SynEdit).
 
 The source code.
 
@@ -49,4 +53,5 @@ Version history.
 1.9.3: The user experience has improved.
 1.9.4: The small changes.
 1.9.5: The small bug has been fixed.
-1.9.6: The small changes.
+1.9.6-1.9.7: The small changes.
+1.9.8-2.0: The user interface has improved.

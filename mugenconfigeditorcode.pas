@@ -10,7 +10,7 @@ unit mugenconfigeditorcode;
 
 interface
 
-uses Classes,LCLProc,LCLType,SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Menus, LazFileUtils;
+uses Classes, LCLProc, LCLType, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Menus, LazFileUtils, SynEdit, SynHighlighterIni;
 
 type
 
@@ -18,20 +18,22 @@ type
 
     TMainWindow = class(TForm)
     MainMenu: TMainMenu;
-    Editor: TMemo;
     FileMenu: TMenuItem;
     HelpMenu: TMenuItem;
     AboutMenuItem: TMenuItem;
+    SelectAllMenuItem: TMenuItem;
     NewMenuItem: TMenuItem;
     OpenMenuItem: TMenuItem;
     SaveMenuItem: TMenuItem;
     SaveAsMenuItem: TMenuItem;
-    ClipboardMenu: TMenuItem;
+    EditMenu: TMenuItem;
     CopyMenuItem: TMenuItem;
     PasteMenuItem: TMenuItem;
     CutMenuItem: TMenuItem;
     OpenDialog: TOpenDialog;
     SaveDialog: TSaveDialog;
+    ConfigurationHighLighter: TSynIniSyn;
+    Editor: TSynEdit;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
@@ -40,6 +42,7 @@ type
     procedure OpenMenuItemClick(Sender: TObject);
     procedure SaveMenuItemClick(Sender: TObject);
     procedure SaveAsMenuItemClick(Sender: TObject);
+    procedure SelectAllMenuItemClick(Sender: TObject);
     procedure CopyMenuItemClick(Sender: TObject);
     procedure PasteMenuItemClick(Sender: TObject);
     procedure CutMenuItemClick(Sender: TObject);
@@ -51,8 +54,9 @@ type
     procedure save_file(const target:string);
     procedure window_setup();
     procedure window_resize();
-    procedure interface_setup();
+    procedure editor_setup();
     procedure dialog_setup();
+    procedure set_shortcut();
     procedure setup();
   public
     { public declarations }
@@ -112,17 +116,12 @@ begin
  Self.Editor.Height:=Self.ClientHeight-10;
 end;
 
-procedure TMainWindow.interface_setup();
+procedure TMainWindow.editor_setup();
 begin
- Self.Editor.WordWrap:=False;
+ Self.ConfigurationHighLighter.DefaultFilter:=Self.OpenDialog.Filter;
+ Self.ConfigurationHighLighter.Enabled:=True;
+ Self.Editor.Highlighter:=Self.ConfigurationHighLighter;
  Self.Editor.ScrollBars:=ssBoth;
- Self.NewMenuItem.ShortCut:=TextToShortCut('Ctrl+N');
- Self.OpenMenuItem.ShortCut:=TextToShortCut('Ctrl+O');
- Self.SaveMenuItem.ShortCut:=TextToShortCut('Ctrl+S');
- Self.SaveAsMenuItem.ShortCut:=TextToShortCut('Ctrl+Alt+S');
- Self.CopyMenuItem.ShortCut:=TextToShortCut('Ctrl+C');
- Self.PasteMenuItem.ShortCut:=TextToShortCut('Ctrl+V');
- Self.CutMenuItem.ShortCut:=TextToShortCut('Ctrl+X');
 end;
 
 procedure TMainWindow.dialog_setup();
@@ -133,11 +132,24 @@ begin
  Self.SaveDialog.Filter:='Game settings|*.def|Configuration file|*.cfg|Character definitive|*.cns|Animation settings|*.air|AI settings|*.cmd';
 end;
 
+procedure TMainWindow.set_shortcut();
+begin
+ Self.NewMenuItem.ShortCut:=TextToShortCut('Ctrl+N');
+ Self.OpenMenuItem.ShortCut:=TextToShortCut('Ctrl+O');
+ Self.SaveMenuItem.ShortCut:=TextToShortCut('Ctrl+S');
+ Self.SaveAsMenuItem.ShortCut:=TextToShortCut('Ctrl+Alt+S');
+ Self.SelectAllMenuItem.ShortCut:=TextToShortCut('Ctrl+A');
+ Self.CopyMenuItem.ShortCut:=TextToShortCut('Ctrl+C');
+ Self.PasteMenuItem.ShortCut:=TextToShortCut('Ctrl+V');
+ Self.CutMenuItem.ShortCut:=TextToShortCut('Ctrl+X');
+end;
+
 procedure TMainWindow.setup();
 begin
  Self.window_setup();
- Self.interface_setup();
  Self.dialog_setup();
+ Self.editor_setup();
+ Self.set_shortcut();
  Self.window_resize();
  Self.create_new_file();
 end;
@@ -167,7 +179,7 @@ end;
 
 procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 1.9.6. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 2.0. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TMainWindow.NewMenuItemClick(Sender: TObject);
@@ -196,6 +208,11 @@ end;
 procedure TMainWindow.SaveAsMenuItemClick(Sender: TObject);
 begin
  Self.SaveDialog.Execute();
+end;
+
+procedure TMainWindow.SelectAllMenuItemClick(Sender: TObject);
+begin
+ Self.Editor.SelectAll();
 end;
 
 procedure TMainWindow.CopyMenuItemClick(Sender: TObject);
