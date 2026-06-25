@@ -10,7 +10,8 @@ unit mugenconfigeditorcode;
 
 interface
 
-uses Classes, LCLProc, LCLType, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Menus, LazFileUtils, SynEdit, SynHighlighterIni;
+uses Classes, LCLProc, LCLType, SysUtils, Forms, Controls, Graphics, Dialogs,
+  StdCtrls, Menus, ComCtrls, LazFileUtils, SynEdit, SynHighlighterIni;
 
 type
 
@@ -21,6 +22,9 @@ type
     FileMenu: TMenuItem;
     HelpMenu: TMenuItem;
     AboutMenuItem: TMenuItem;
+    RedoMenuItem: TMenuItem;
+    FileBar: TStatusBar;
+    UndoMenuItem: TMenuItem;
     SelectAllMenuItem: TMenuItem;
     NewMenuItem: TMenuItem;
     OpenMenuItem: TMenuItem;
@@ -42,13 +46,14 @@ type
     procedure OpenMenuItemClick(Sender: TObject);
     procedure SaveMenuItemClick(Sender: TObject);
     procedure SaveAsMenuItemClick(Sender: TObject);
+    procedure UndoMenuItemClick(Sender: TObject);
+    procedure RedoMenuItemClick(Sender: TObject);
     procedure SelectAllMenuItemClick(Sender: TObject);
     procedure CopyMenuItemClick(Sender: TObject);
     procedure PasteMenuItemClick(Sender: TObject);
     procedure CutMenuItemClick(Sender: TObject);
     procedure SaveDialogCanClose(Sender: TObject; var CanClose: boolean);
   private
-    document:string;
     procedure create_new_file();
     procedure load_file(const target:string);
     procedure save_file(const target:string);
@@ -75,7 +80,7 @@ end;
 procedure TMainWindow.create_new_file();
 begin
  Self.Editor.Lines.Clear();
- Self.document:='';
+ Self.FileBar.SimpleText:='';
 end;
 
 procedure TMainWindow.load_file(const target:string);
@@ -83,7 +88,7 @@ begin
  try
   Self.Editor.Lines.LoadFromFile(target);
   Self.Editor.Modified:=False;
-  Self.document:=target;
+  Self.FileBar.SimpleText:=target;
  except
   On E:Exception do ShowMessage(E.Message);
  end;
@@ -95,7 +100,7 @@ begin
  try
   Self.Editor.Lines.SaveToFile(target);
   Self.Editor.Modified:=False;
-  Self.document:=target;
+  Self.FileBar.SimpleText:=target;
  except
   On E:Exception do ShowMessage(E.Message);
  end;
@@ -138,6 +143,8 @@ begin
  Self.OpenMenuItem.ShortCut:=TextToShortCut('Ctrl+O');
  Self.SaveMenuItem.ShortCut:=TextToShortCut('Ctrl+S');
  Self.SaveAsMenuItem.ShortCut:=TextToShortCut('Ctrl+Alt+S');
+ Self.UndoMenuItem.ShortCut:=TextToShortCut('Ctrl+Z');
+ Self.RedoMenuItem.ShortCut:=TextToShortCut('Ctrl+Y');
  Self.SelectAllMenuItem.ShortCut:=TextToShortCut('Ctrl+A');
  Self.CopyMenuItem.ShortCut:=TextToShortCut('Ctrl+C');
  Self.PasteMenuItem.ShortCut:=TextToShortCut('Ctrl+V');
@@ -179,7 +186,7 @@ end;
 
 procedure TMainWindow.AboutMenuItemClick(Sender: TObject);
 begin
- ShowMessage('Mugen config editor. Version 2.0. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
+ ShowMessage('Mugen config editor. Version 2.0.2. 2007-2026 years. This software was made by Popov Evgeniy Alekseyevich');
 end;
 
 procedure TMainWindow.NewMenuItemClick(Sender: TObject);
@@ -194,9 +201,9 @@ end;
 
 procedure TMainWindow.SaveMenuItemClick(Sender: TObject);
 begin
- if Self.document<>'' then
+ if Self.FileBar.SimpleText<>'' then
  begin
-  Self.save_file(Self.document);
+  Self.save_file(Self.FileBar.SimpleText);
  end
  else
  begin
@@ -208,6 +215,16 @@ end;
 procedure TMainWindow.SaveAsMenuItemClick(Sender: TObject);
 begin
  Self.SaveDialog.Execute();
+end;
+
+procedure TMainWindow.UndoMenuItemClick(Sender: TObject);
+begin
+ if Self.Editor.CanUndo=True then Self.Editor.Undo();
+end;
+
+procedure TMainWindow.RedoMenuItemClick(Sender: TObject);
+begin
+ if Self.Editor.CanRedo=True then Self.Editor.Redo();
 end;
 
 procedure TMainWindow.SelectAllMenuItemClick(Sender: TObject);

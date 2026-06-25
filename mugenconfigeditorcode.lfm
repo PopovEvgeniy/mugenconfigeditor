@@ -183,6 +183,13 @@ object MainWindow: TMainWindow
       end
     end
   end
+  object FileBar: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 273
+    Width = 374
+    Panels = <>
+  end
   object OpenDialog: TOpenDialog
     Left = 176
     Top = 248
@@ -216,6 +223,14 @@ object MainWindow: TMainWindow
     end
     object EditMenu: TMenuItem
       Caption = 'Edit'
+      object UndoMenuItem: TMenuItem
+        Caption = 'Undo'
+        OnClick = UndoMenuItemClick
+      end
+      object RedoMenuItem: TMenuItem
+        Caption = 'Redo'
+        OnClick = RedoMenuItemClick
+      end
       object SelectAllMenuItem: TMenuItem
         Caption = 'Select all'
         OnClick = SelectAllMenuItemClick
@@ -242,7 +257,7 @@ object MainWindow: TMainWindow
     end
   end
   object ConfigurationHighLighter: TSynIniSyn
-    DefaultFilter = 'Файлы INI (*.ini)|*.ini'
+    DefaultFilter = 'INI files (*.ini)|*.ini'
     Enabled = False
     Left = 56
     Top = 248
